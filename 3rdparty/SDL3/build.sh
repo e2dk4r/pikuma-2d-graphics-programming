@@ -4,6 +4,9 @@ if [ ! -d "$outputDir" ]; then
   mkdir "$outputDir"
 fi
 
+#LIBSDL_TAG=preview-3.1.3
+#LIBSDL_URL="https://github.com/libsdl-org/SDL/releases/download/$LIBSDL_PREFIX-$LIBSDL_VERSION/$LIBSDL_FILEBASENAME.tar.xz"
+#LIBSDL_HASH_B2="3daca77f7f1c7134272dd9bab70f5086d72f02093f3c588daf3e847e073251c8718238b46dc8e1a53c8e008df7441bd2d258b8d4950c42453a29d6e944db8cb2"
 # To see the available tags, execute below command:
 # $ curl -sH 'accept: application/vnd.github+json' https://api.github.com/repos/libsdl-org/SDL/releases | jq -r '.[].tag_name'
 LIBSDL_TAG=preview-3.1.6
@@ -17,6 +20,7 @@ LIBSDL_FILEBASENAME="SDL${LIBSDL_VERSION%%.*}-$LIBSDL_VERSION"
 LIBSDL_URL="https://github.com/libsdl-org/SDL/releases/download/$LIBSDL_PREFIX-$LIBSDL_VERSION/$LIBSDL_FILEBASENAME.tar.gz"
 LIBSDL_FILE="$outputDir/$LIBSDL_FILEBASENAME.tar.gz"
 LIBSDL_HASH_B2="6fa3182ab933bad2f3f939acddf82cddc9cc059debcc8c04e546639932f5cc3152d4a6a656ad24848c90b7827a49e19b518d98d14af50b1b914f9f2e91d8441b"
+
 Log "3rdparty/SDL"
 Log "- tag:     $LIBSDL_TAG"
 Log "- version: $LIBSDL_VERSION"
@@ -55,7 +59,8 @@ fi
 # BUILD
 ################################################################
 if [ ! -e "$LIBSDL_DIR-install/lib64/libSDL${LIBSDL_VERSION%%.*}.so" ]; then
-  cmake -G Ninja -S "$LIBSDL_DIR" -B "$LIBSDL_DIR/build" -D CMAKE_INSTALL_PREFIX="$LIBSDL_DIR-install" -D CMAKE_BUILD_TYPE=Release \
+  cmake -G Ninja -S "$LIBSDL_DIR" -B "$LIBSDL_DIR/build" -D CMAKE_INSTALL_PREFIX="$LIBSDL_DIR-install" \
+    -D CMAKE_BUILD_TYPE=Debug \
     -D SDL_DUMMYAUDIO=OFF \
     -D SDL_DUMMYVIDEO=OFF \
     -D SDL_IBUS=OFF \

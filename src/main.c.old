@@ -118,12 +118,10 @@ SDL_AppIterate(void *appstate)
   //     argv=0x00007fffffffe308) at SDL_main_impl.h:149:24 frame #19: 0x00007ffff799ccbd
   //     libc.so.6`___lldb_unnamed_symbol3275 + 109 frame #20: 0x00007ffff799cd79 libc.so.6`__libc_start_main + 137
   //     frame #21: 0x0000555555556c25 game`_start + 37
-
-  GameLibraryReload(&state->lib, state);
+  // GameLibraryReload(&state->lib, state);
   pfnGameUpdateAndRender GameUpdateAndRender = state->lib.GameUpdateAndRender;
   debug_assert(GameUpdateAndRender);
 #endif
-
   GameUpdateAndRender(memory, newInput, renderer);
 
   state->lastTime = nowInNanoseconds;
